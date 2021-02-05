@@ -1,0 +1,56 @@
+label{
+    display: block;
+    margin: 15px 0px;
+    position: relative;
+    input{
+        width: 100%;
+        padding: 6px;
+        outline: none;
+        border: 1px solid rgb(212, 212, 212);
+        box-shadow: inset 0px 0px 2px 0px rgb(224, 224, 224);
+        &:focus{ border: 1px solid blue; }
+        &:focus + span{
+            left: 100%;
+            transform: translate(-101%, -50%) ;
+            color: blue;
+        }
+        &:valid + span{
+            left: 100%;
+            color: rgb(189, 189, 189);
+            transform: translate(-101%, -50%) ;
+        }
+    }
+    span{
+        transition: 0.3s;
+        width: 100px;
+        position: absolute;
+        left: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+
+    }
+}
+
+.btn-send{
+    width: 100px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    cursor: pointer
+}
+
+.btn-add{
+    display: none;
+    width: 150px;
+    outline: none;
+    margin: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(0, 70, 128);
+    color: white;
+    cursor: pointer;
+    @media #{$bp-tablet}, #{$bp-phone} { display: block; }
+}

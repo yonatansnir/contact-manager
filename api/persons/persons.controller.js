@@ -10,6 +10,7 @@ exports.getAllPersons = (req, res) => {
 
 exports.postNewPerson = (req, res) => {
     req.body.modifiedTime = new Date().toISOString();
+    console.log(req.body);
     let sqlQuery = `insert into persons set ?`;
     connection.query(sqlQuery, req.body, (err, result) => {
         if (err) return res.json(err);
