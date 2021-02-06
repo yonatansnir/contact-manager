@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/persons', require('./api/persons/persons.router'));
+app.use('/api/contacts', require('./api/contacts/contacts.router'));
 
 let PORT = process.env.PORT;
 app.listen(

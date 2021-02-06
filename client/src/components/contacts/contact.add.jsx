@@ -1,8 +1,9 @@
 import { useContext, useState } from "react"
-import { PersonContext } from "../../context/person.provider";
+import { ContactsContext } from "../../context/contacts.provider";
 import Button from "../form-element/Button";
 import Input from "../form-element/Input";
-import PersonIcon from "../icons/person.icon";
+import ContactIcon from "../icons/contact.icon";
+import { postNewContact } from "./contact.api";
 
 const formInputs = [
     { id: 1, title: 'First Name', type: 'text', name: 'firstName' },
@@ -15,8 +16,8 @@ const formInputs = [
     { id: 8, title: 'Postal Code', type: 'tel', name: 'postalcode' },
 ]
 
-const AddPerson = ({ toggle }) => {
-    const [persons, dispatch] = useContext(PersonContext);
+const AddContact = ({ toggle }) => {
+    const [persons, dispatch] = useContext(ContactsContext);
     const [form, setForm] = useState({
         firstName: '',
         lastName: '',
@@ -34,20 +35,12 @@ const AddPerson = ({ toggle }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5050/api/persons', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(form)
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            dispatch({ type: 'ADD_PERSON', payload: {...form, personId: data.insertId } })
-        });
+        postNewContact(form, dispatch);
     }
 
     return (
         <div className={toggle ? "add-person show" : "add-person"}>
-            <h2><PersonIcon />Add New Person</h2>
+            <h2><ContactIcon />Add New Person</h2>
             <form onSubmit={handleSubmit}>
                 {formInputs.map(input => <Input key={input.id} {...input} value={form[input.name]} handleChange={handleChange} />)}
                 <Button>Send</Button>
@@ -56,4 +49,4 @@ const AddPerson = ({ toggle }) => {
     )
 }
 
-export default AddPerson;
+export default AddContact;

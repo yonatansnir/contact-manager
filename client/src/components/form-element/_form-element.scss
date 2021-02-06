@@ -21,6 +21,7 @@ label{
         }
     }
     span{
+        color: rgb(153, 153, 153);
         transition: 0.3s;
         width: 100px;
         position: absolute;
@@ -53,4 +54,16 @@ label{
     color: white;
     cursor: pointer;
     @media #{$bp-tablet}, #{$bp-phone} { display: block; }
+}
+
+.btn-close{
+    outline: none;
+    width: 100px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    display: block; margin: 10px auto;
+    background-color: rgb(17, 9, 134);
+    color: white;
+    cursor: pointer
 }

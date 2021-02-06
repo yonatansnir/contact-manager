@@ -109,9 +109,7 @@ header h1 {
   font-size: x-large;
 }
 
-.person-search svg {
-  width: 25px;
-  fill: #3b3bbe;
+.person-search > div {
   position: absolute;
   top: 50%;
   right: 10px;
@@ -119,7 +117,21 @@ header h1 {
           transform: translateY(-50%);
 }
 
+.person-search h4 {
+  font-weight: 400;
+  color: #6363da;
+  font-size: 30px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.person-search svg {
+  width: 25px;
+  fill: #3b3bbe;
+}
+
 .person-item {
+  cursor: pointer;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 30px 1fr 1fr 1fr 30px;
@@ -150,7 +162,6 @@ header h1 {
 }
 
 .person-item svg {
-  cursor: pointer;
   margin: auto;
   width: 15px;
 }
@@ -223,6 +234,63 @@ header h1 {
   }
 }
 
+.contact-box {
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.308);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.contact-box > div {
+  width: 500px;
+  max-width: 500px;
+  min-height: 300px;
+  padding: 20px;
+  margin: 20px;
+  background: white;
+  border-radius: 10px;
+}
+
+.contact-box table {
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.contact-box table td {
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.contact-box table tr td {
+  padding: 4px;
+}
+
+.contact-box table tr td:nth-child(1) {
+  font-weight: 600;
+}
+
+.contact-box table tr td:nth-child(2) {
+  width: 70%;
+}
+
+@media (max-width: 550px) {
+  .contact-box table tr td:nth-child(2) {
+    width: 50%;
+  }
+}
+
 label {
   display: block;
   margin: 15px 0px;
@@ -257,6 +325,7 @@ label input:valid + span {
 }
 
 label span {
+  color: #999999;
   -webkit-transition: 0.3s;
   transition: 0.3s;
   width: 100px;
@@ -294,5 +363,18 @@ label span {
   .btn-add {
     display: block;
   }
+}
+
+.btn-close {
+  outline: none;
+  width: 100px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin: 10px auto;
+  background-color: #110986;
+  color: white;
+  cursor: pointer;
 }
 /*# sourceMappingURL=index.css.map */
