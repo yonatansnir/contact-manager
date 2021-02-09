@@ -1,7 +1,7 @@
 // const address = req
 
-export const address = './api/contacts';
-export const addressLog = './api/log';
+export const address = 'https://simple-cm.herokuapp.com/api/contacts';
+export const addressLog = 'https://simple-cm.herokuapp.com/api/log';
 
 /**
  * Convert Date into a string.
