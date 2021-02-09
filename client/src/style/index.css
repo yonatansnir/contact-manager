@@ -25,6 +25,19 @@ body {
   }
 }
 
+.navigation {
+  background: #5c5cbb;
+  padding: 10px;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: white;
+  width: 100px;
+  height: 40px;
+  margin: 10px;
+}
+
 header {
   text-align: center;
   padding: 30px;
@@ -35,7 +48,8 @@ header h1 {
 }
 
 .lds-ring {
-  display: inline-block;
+  display: block;
+  margin: auto;
   position: relative;
   width: 80px;
   height: 80px;
@@ -49,11 +63,11 @@ header h1 {
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid #fff;
+  border: 8px solid #583fe4;
   border-radius: 50%;
   -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
           animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: #583fe4 transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -134,6 +148,7 @@ header h1 {
   cursor: pointer;
   display: -ms-grid;
   display: grid;
+  text-transform: capitalize;
   -ms-grid-columns: 30px 1fr 1fr 1fr 30px;
       grid-template-columns: 30px 1fr 1fr 1fr 30px;
   -webkit-box-align: center;
@@ -204,6 +219,8 @@ header h1 {
 }
 
 .add-person {
+  -webkit-transition: 1s;
+  transition: 1s;
   display: block;
   padding: 15px 10px;
   margin: 10px;
@@ -231,6 +248,12 @@ header h1 {
 @media (min-width: 551px) and (max-width: 800px), (max-width: 550px) {
   .add-person {
     display: none;
+  }
+}
+
+@media (min-width: 551px) and (max-width: 800px), (max-width: 550px) {
+  .show {
+    display: block;
   }
 }
 
@@ -291,6 +314,19 @@ header h1 {
   }
 }
 
+.edit-header h2 {
+  text-transform: capitalize;
+}
+
+.edit-header h3 {
+  font-weight: 200;
+}
+
+.address h4 {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
 label {
   display: block;
   margin: 15px 0px;
@@ -299,7 +335,7 @@ label {
 
 label input {
   width: 100%;
-  padding: 6px;
+  padding: 8px 6px;
   outline: none;
   border: 1px solid #d4d4d4;
   -webkit-box-shadow: inset 0px 0px 2px 0px #e0e0e0;
@@ -365,16 +401,130 @@ label span {
   }
 }
 
-.btn-close {
+.btn-blue {
   outline: none;
+  cursor: pointer;
   width: 100px;
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
-  display: block;
-  margin: 10px auto;
-  background-color: #110986;
   color: white;
+  position: relative;
+  margin: 3px 10px;
+  background-color: #110986;
+}
+
+.btn-blue svg {
+  position: absolute;
+  width: 13px;
+  fill: white;
+  left: 10px;
+}
+
+.btn-grey {
+  outline: none;
   cursor: pointer;
+  width: 100px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  position: relative;
+  margin: 3px 10px;
+  margin: 0px;
+  margin-bottom: 10px;
+  background-color: #7c7c7c;
+}
+
+.btn-red {
+  outline: none;
+  cursor: pointer;
+  width: 100px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  position: relative;
+  margin: 3px 10px;
+  background-color: #a01313;
+}
+
+.alert {
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.308);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.alert > div {
+  text-align: center;
+  padding: 10px;
+  max-width: 300px;
+  width: 300px;
+  margin: 10px;
+  min-height: 100px;
+  background: white;
+  border-radius: 10px;
+}
+
+.success-msg {
+  margin-top: 10px;
+  padding: 3px;
+  background-color: #84dd84;
+  border: 1px solid #21b821;
+  border-left: 5px solid #21b821;
+}
+
+.edit-contact {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.edit-header {
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.edit-header p {
+  font-size: small;
+}
+
+@media (max-width: 550px) {
+  .edit-header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.log {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  line-height: 25px;
+  background: white;
+  border-radius: 10px;
+}
+
+.log div:nth-child(odd) {
+  background: whitesmoke;
 }
 /*# sourceMappingURL=index.css.map */

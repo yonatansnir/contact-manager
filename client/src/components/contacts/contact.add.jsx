@@ -3,21 +3,20 @@ import { ContactsContext } from "../../context/contacts.provider";
 import Button from "../form-element/Button";
 import Input from "../form-element/Input";
 import ContactIcon from "../icons/contact.icon";
+import Address from "./contact.address";
 import { postNewContact } from "./contact.api";
 
 const formInputs = [
     { id: 1, title: 'First Name', type: 'text', name: 'firstName' },
     { id: 2, title: 'Last Name', type: 'text', name: 'lastName' },
     { id: 3, title: 'Phone', type: 'text', name: 'phone' },
-    { id: 4, title: 'Email', type: 'text', name: 'email' },
-    { id: 5, title: 'State', type: 'text', name: 'state' },
-    { id: 6, title: 'City', type: 'text', name: 'city' },
-    { id: 7, title: 'Street', type: 'text', name: 'street' },
-    { id: 8, title: 'Postal Code', type: 'tel', name: 'postalcode' },
+    { id: 4, title: 'Email', type: 'text', name: 'email' }
 ]
 
 const AddContact = ({ toggle }) => {
     const [persons, dispatch] = useContext(ContactsContext);
+    let [message, setMessage] = useState(false);
+
     const [form, setForm] = useState({
         firstName: '',
         lastName: '',
@@ -35,7 +34,11 @@ const AddContact = ({ toggle }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        postNewContact(form, dispatch);
+        postNewContact(form, dispatch, setMessage);
+        setTimeout(() => {
+            console.log('Checking for memory leak')
+            setMessage(false)
+        },7000)
     }
 
     return (
@@ -43,8 +46,10 @@ const AddContact = ({ toggle }) => {
             <h2><ContactIcon />Add New Person</h2>
             <form onSubmit={handleSubmit}>
                 {formInputs.map(input => <Input key={input.id} {...input} value={form[input.name]} handleChange={handleChange} />)}
+                <Address form={form} setForm={setForm} />
                 <Button>Send</Button>
             </form>
+            {message ? <div className="success-msg">Updated!</div> : ''}
         </div>
     )
 }

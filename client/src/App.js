@@ -1,27 +1,25 @@
-import { useState } from 'react';
-
 import Header from "./components/header/header";
-import AddContact from "./components/contacts/contact.add";
-import ContactsList from "./components/contacts/contacts.list";
 import ContactsProvider from "./context/contacts.provider";
+import { Link, Route, Switch } from 'react-router-dom';
+import Main from './pages/main/main';
+import EditPage from "./pages/edit/edit";
+import Log from "./pages/log/log";
 
 function App() {
-  const [toggle, setToggle] = useState(false)
-  console.log(toggle);
   return (
     <div className="App">
       <Header />
-      <div className="main">
-        <ContactsProvider>
-          <div>
-            <button className="btn-add" onClick={() => setToggle(!toggle)}>
-              {toggle ? 'Close' : 'Add New User'}
-            </button>
-            <AddContact toggle={toggle} />
-          </div>
-          <ContactsList />
-        </ContactsProvider>
+      <div className="navigation">
+        <Link to="/">Home</Link>
+        <Link to="/log">Log</Link>
       </div>
+      <ContactsProvider>
+        <Switch>
+          <Route path="/edit/:id" component={EditPage} />
+          <Route path="/log" component={Log} />
+          <Route path="/" component={Main} />
+        </Switch>
+      </ContactsProvider>
     </div>
   );
 }

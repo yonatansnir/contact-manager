@@ -1,0 +1,11 @@
+.log{
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    line-height: 25px;
+    background: white;
+    border-radius: 10px;
+    div:nth-child(odd){
+        background: whitesmoke;
+    }
+}

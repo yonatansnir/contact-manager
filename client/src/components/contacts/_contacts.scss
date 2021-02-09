@@ -31,6 +31,7 @@
 .person-item{
     cursor: pointer;
     display: grid;
+    text-transform: capitalize;
     grid-template-columns: 30px 1fr 1fr 1fr 30px;
     align-items: center;
     padding: 15px 10px;
@@ -63,6 +64,7 @@
 }
 
 .add-person{
+    transition: 1s;
     display: block;
     padding: 15px 10px;
     margin: 10px;
@@ -88,16 +90,14 @@
     }
 }
 
+.show{
+    @media #{$bp-tablet}, #{$bp-phone}{ 
+        display: block;
+    }
+}
+
 .contact-box{
-    top: 0px;
-    left: 0px;
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.308);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include overlay-popup;
 
     > div {
         width: 500px;
@@ -120,5 +120,19 @@
             width: 70%;
             @media #{$bp-phone} { width: 50%; }
         }
+    }
+}
+
+.edit-header{
+    h2{ text-transform: capitalize; }
+    h3{
+        font-weight: 200;
+    }
+}
+
+.address{
+    h4{
+        font-weight: 500;
+        margin-bottom: 10px;
     }
 }

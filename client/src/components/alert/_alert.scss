@@ -1,0 +1,21 @@
+.alert{
+    @include overlay-popup;
+    > div{
+        text-align: center;
+        padding: 10px;
+        max-width: 300px;
+        width: 300px;
+        margin: 10px;
+        min-height: 100px;
+        background: white;
+        border-radius: 10px;
+    }
+}
+
+.success-msg{
+    margin-top: 10px;
+    padding: 3px;
+    background-color: rgb(132, 221, 132);
+    border: 1px solid rgb(33, 184, 33);
+    border-left: 5px solid rgb(33, 184, 33);
+}

@@ -2,18 +2,16 @@ import { useContext, useEffect, useState } from "react"
 import { ContactsContext } from "../../context/contacts.provider";
 import SearchIcon from "../icons/search.icon";
 import Loader from "../loader/loader";
-import { getContacts } from "./contact.api";
 import ContactItem from "./contact.item";
 
 const ContactList = () => {
     const [contacts, dispatch] = useContext(ContactsContext);
+    let { contactsData, failed } = contacts;
     let [search, setSearch] = useState('');
 
-    const personsFilter = contacts?.filter((p) => searchFilter(p, search));
-
-    useEffect(() => {
-        getContacts(dispatch);
-    }, [])
+    const personsFilter = contactsData?.filter((p) => searchFilter(p, search));
+    
+    if (failed) return <h3 style={{color: 'red', textAlign: 'center'}} >ERROR GET CONTACTS</h3>
 
     return (
         <div className="persons-list">
@@ -24,8 +22,8 @@ const ContactList = () => {
                     <SearchIcon />
                 </div>
             </div>
-            {!contacts ? <Loader /> :
-                personsFilter.map(person => <ContactItem key={person.personId} person={person} />)
+            {!contactsData ? <Loader /> :
+                personsFilter.map(person => <ContactItem key={person.contactId} person={person} />)
             }
         </div>
     )

@@ -3,7 +3,7 @@ import Loader from "../loader/loader"
 const Header = () => {
     return(
         <header>
-            <h1>Simple Contact Manager</h1>
+            <h1>Simple Contacts Manager</h1>
         </header>
     )
 }

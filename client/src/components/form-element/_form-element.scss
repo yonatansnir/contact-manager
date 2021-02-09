@@ -1,10 +1,22 @@
+@mixin btn {
+    outline: none;
+    cursor: pointer;
+    width: 100px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;    
+    position: relative;
+    margin: 3px 10px;
+}
+
 label{
     display: block;
     margin: 15px 0px;
     position: relative;
     input{
         width: 100%;
-        padding: 6px;
+        padding: 8px 6px;
         outline: none;
         border: 1px solid rgb(212, 212, 212);
         box-shadow: inset 0px 0px 2px 0px rgb(224, 224, 224);
@@ -56,14 +68,25 @@ label{
     @media #{$bp-tablet}, #{$bp-phone} { display: block; }
 }
 
-.btn-close{
-    outline: none;
-    width: 100px;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    display: block; margin: 10px auto;
+.btn-blue{
+    @include btn;
     background-color: rgb(17, 9, 134);
-    color: white;
-    cursor: pointer
+    svg{
+        position: absolute;
+        width: 13px;
+        fill: white;
+        left: 10px;
+    }
+}
+
+.btn-grey{
+    @include btn;
+    margin: 0px;
+    margin-bottom: 10px;
+    background-color: rgb(124, 124, 124);
+}
+
+.btn-red{
+    @include btn;
+    background-color: rgb(160, 19, 19)
 }

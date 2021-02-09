@@ -1,39 +1,66 @@
 import { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { ContactsContext } from "../../context/contacts.provider";
+import { dateToString } from "../../utils/common";
+import Alert from "../alert/alert";
 import Button from "../form-element/Button";
 import Input from "../form-element/Input";
 import Loader from "../loader/loader";
+import Address from './contact.address';
+import { changeContact, deleteContact, getContactModifiedInfo } from "./contact.api";
 
-const EditContact = ({ contactId, setContactId }) => {
-    const [contacts, dispatch] = useContext(ContactsContext);
-    const [form, setForm] = useState({});
+const EditContact = ({ contactId }) => {
+    const history = useHistory();
+    
+    let [contacts, dispatch] = useContext(ContactsContext);
+    let [message, setMessage] = useState(false);
+    let [modified, setModified] = useState(null);
+    let [deletePopup, setDeletePopup] = useState(false);
+
+    let { contactsData, failed } = contacts;
+    
+    const [form, setForm] = useState(null);
 
     useEffect(() => {
-        if (!contactId) return;
-        let findContact = contacts.find(c => c.personId === contactId);
-        setForm(findContact);
-    }, [contactId])
+        let contact = contactsData?.find(p => p.contactId === parseInt(contactId));
+        if (contactsData && !contact) return setForm('NOT_FOUND');
+        setForm(contact);
+        getContactModifiedInfo(contactId, setModified);
+    }, [contactsData, contactId])
 
     const handleChange = (e) => {
         setForm({...form, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        fetch(`http://localhost:5050/api/contacts/${contactId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form)
-        })
-        .then(resp => resp.json())
-        .then(data => console.log(data));
+    const handleDelete = () => {
+        deleteContact(contactId, dispatch);
+        history.push('/');
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        changeContact(contactId, form, dispatch, setMessage);
+    }
+
+    if (form === 'NOT_FOUND') return <h2>Contact Not Found</h2>
+
     return(
-        <div className="contact-box">
-            {contactId ? 
+        form ? 
                 <form onSubmit={handleSubmit}>
-                    <h1>Edit Contact</h1>
+                    <div className="edit-header">
+                        <div>
+                            <h2>{form.firstName} {form.lastName}</h2>
+                            {modified ? 
+                            <h3>Edited {modified.numberOfEdits} times.<br />
+                            {modified.modifiedTime ? 'Last modified ' + dateToString(modified.modifiedTime) : ''}</h3>
+                            : 'Loading...'
+                            }
+                        </div>
+                        <div>
+                            <p>Created
+                            {" " + dateToString(modified?.createdTime)}</p>
+                        </div>
+                    </div>
                     <Input title="First Name" type="text" name="firstName" 
                         value={form.firstName} 
                         handleChange={handleChange}
@@ -46,32 +73,22 @@ const EditContact = ({ contactId, setContactId }) => {
                         value={form.phone} 
                         handleChange={handleChange}
                     />
-                    <Input title="Email" type="text" name="Email" 
+                    <Input title="Email" type="text" name="email" 
                         value={form.email} 
                         handleChange={handleChange}
                     />
-                    <Input title="State" type="text" name="state" 
-                        value={form.state} 
-                        handleChange={handleChange}
-                    />
-                    <Input title="City" type="text" name="city" 
-                        value={form.city} 
-                        handleChange={handleChange}
-                    />
-                    <Input title="street" type="text" name="street" 
-                        value={form.street} 
-                        handleChange={handleChange}
-                    />
-                    <Input title="Postal Code" type="text" name="postalcode" 
-                        value={form.postalcode} 
-                        handleChange={handleChange}
-                    />
-                    <Button>Update</Button>
-                    <button type="rest" className="btn-close" onClick={() => setContactId('')}>Close</button>
+                    <Address form={form} setForm={setForm} />
+                    <div>
+                        <Button>Update</Button>
+                        <button type="button" onClick={() => setDeletePopup(true)} className="btn-red" style={{ width: '150px' }}>Delete Contact</button>
+                        {deletePopup ? 
+                        <Alert message='Are You Sure?' handler={handleDelete} cancel={() => setDeletePopup(false)} />
+                        : '' }
+                    </div>
+                    {message ? <div className="success-msg">Updated!</div> : ''}
+                    
                 </form>
             : <Loader />
-            }
-        </div>
     )
 
 }
