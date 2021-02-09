@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,6 @@
   "bugs": {
     "url": "https://github.com/yonatansnir/contact-manager/issues"
   },
-  "homepage": "https://github.com/yonatansnir/contact-manager#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",

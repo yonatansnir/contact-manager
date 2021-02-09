@@ -1,7 +1,7 @@
 // const address = req
 
-export const address = 'http://localhost:5050/api/contacts';
-export const addressLog = 'http://localhost:5050/api/log';
+export const address = './api/contacts';
+export const addressLog = './api/log';
 
 /**
  * Convert Date into a string.
